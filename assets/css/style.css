@@ -1,0 +1,15 @@
+.card-img-top, .card{
+ 
+    height:350px;
+}
+
+.imgHeight{
+    max-height:80%;
+    height:80%;
+}
+
+.jumbotron{
+    height:100%;
+   
+
+}
