@@ -36,3 +36,16 @@ label{
     height:70px;
     font-family: 'Merriweather', serif;
 }
+
+.buttonC:active {
+    background-color: yellowgreen;
+  }
+.buttonC:visited{
+    background-color: blue;
+}
+
+.buttonC{
+    background-color: green;
+    color:white;
+}
+

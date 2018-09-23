@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    var topics = ["health food", "fitness", "pilates", "nutrition", "skin care", "running", "weight lifting", "skin care", "soccer", "basketball", "volleyball", "football", "barre", "detox"];
+    var topics = ["health foods", "fitness", "pilates", "nutrition", "skin care", "running", "weight lifting", "skin care", "green foods", "barre", "detox", "whole foods", "diet"];
     var item;
     function createButtons() {
         $("#buttons-container").empty();
@@ -23,8 +23,15 @@ $(document).ready(function () {
         $("#healthAddTxt").val("");
     });
 
+    var favoriteFunction=  $(document.body).on("click", ".link2", function (){
+        console.log(this);
+        var divFav=$("<div>");
+        this.clone();
+
+    });
+
     var returnRes;
-    $(document).on("click", ".buttonC", function () {
+    $(document.body).on("click", ".buttonC", function () {
         $("#health").empty();
         var chosen = $(this).attr("data-name");
         console.log(chosen);
@@ -46,10 +53,11 @@ $(document).ready(function () {
                     cardImage.attr("data-state", "still");
                     var ul = $("<ul class='list-group list-group-flush'>");
                     var li1 = $("<li class='list-group-item'>");
-                    var li2 = $("<li class='list-group-item'>");
-                    var link = $("<a class='card-link'>").attr("href", res.data[i].images.original.url).text("Download GIF");
+                    var link1 = $("<a class='card-link'>").attr("href", res.data[i].images.original.url).text("Download GIF");
+                    var link2 = $("<a class='card-link ml-0'>").attr("href", favoriteFunction).text("Add to Favorites");
+                    link2.addClass("link2");
                     li1.text("Rating: " + res.data[i].rating);
-                    var group = ul.add(li1).add(li2).add(link);
+                    var group = ul.add(li1).add(link1).add(link2);
                     var cardTitle = $("<div class=title><h5 class='card-title'></h5></div>");
                     if (res.data[i].title === "") {
                         res.data[i].title = "Unamed Gif";
@@ -77,6 +85,7 @@ $(document).ready(function () {
             }
         }
     });
+
     createButtons();
 });
 
