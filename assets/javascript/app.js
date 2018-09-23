@@ -1,30 +1,32 @@
 $(document).ready(function () {
 
-    var topics = ["health food", "fitness", "pilates", "nutrition", "skin care", "running", "weight lifting", "skin care", "soccer", "basketball", "volleyball", "barre", "detox"];
-
-    var returnRes;
+    var topics = ["health food", "fitness", "pilates", "nutrition", "skin care", "running", "weight lifting", "skin care", "soccer", "basketball", "volleyball", "football", "barre", "detox"];
+    var item;
     function createButtons() {
         $("#buttons-container").empty();
         for (var i = 0; i < topics.length; i++) {
             var buttonsCreated = $("<button class='buttonC btn btn-primary m-1'>");
             buttonsCreated.text(topics[i]).attr("data-name", topics[i]).appendTo("#buttons-container");
         }
-
-        $("#addHealthItem").on("click", function (event) {
-            event.preventDefault();
-            var item = $("#healthAddTxt").val().trim();
-            topics.push(item);
-            createButtons();
-            $("#healthAddTxt").clear();
-        });
     }
 
+    $("#addHealthItem").on("click", function (event) {
+        event.preventDefault();
+        console.log(event);
+        item = $("#healthAddTxt").val().trim();
+        topics.push(item);
+        console.log(item);
+        createButtons();
+        $("#healthAddTxt").val("");
+    });
+
+    var returnRes;
     $(document).on("click", ".buttonC", function () {
         $("#health").empty();
         var chosen = $(this).attr("data-name");
         console.log(chosen);
         var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-            chosen + "&api_key=2hmfwLu9FCTywzkURnLFoPDqdeyUUhpU";
+            chosen + "&api_key=2hmfwLu9FCTywzkURnLFoPDqdeyUUhpU&limit=11";
         $.ajax({
             url: queryURL,
             method: "GET"

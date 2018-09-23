@@ -10,6 +10,14 @@
 
 .jumbotron{
     height:100%;
-   
+}
 
+h1{
+    font-family: 'Bitter', serif;
+    text-align: center;
+}
+
+label{
+    font-family: 'Noto Serif', serif;
+    font-size: 20px;
 }
