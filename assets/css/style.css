@@ -1,11 +1,18 @@
-.card-img-top, .card{
- 
-    height:350px;
+body{
+    height: 100%;
+        background: -webkit-linear-gradient(90deg, rgb(43, 228, 157) 10%, #EAECC6 90%); 
+        background:    -moz-linear-gradient(90deg, rgb(43, 228, 157) 10%, #EAECC6 90%); 
+        background:     -ms-linear-gradient(90deg, rgb(43, 228, 157) 10%, #EAECC6 90%); 
+        background:      -o-linear-gradient(90deg, rgb(43, 228, 157) 10%, #EAECC6 90%); 
+        background:         linear-gradient(90deg, rgb(43, 228, 157) 10%, #EAECC6 90%); 
+}
+
+.card{
+    height:50%;
 }
 
 .gif{
-    max-height:80%;
-    height:80%;
+    height:200px;
 }
 
 .jumbotron{
@@ -13,6 +20,7 @@
 }
 
 h1{
+    font-weight: bold;
     font-family: 'Bitter', serif;
     text-align: center;
 }
@@ -20,4 +28,11 @@ h1{
 label{
     font-family: 'Noto Serif', serif;
     font-size: 20px;
+}
+
+.title{
+    font-weight: bold;
+    font-size: 17px;
+    height:70px;
+    font-family: 'Merriweather', serif;
 }

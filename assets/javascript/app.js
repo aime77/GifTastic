@@ -12,10 +12,13 @@ $(document).ready(function () {
 
     $("#addHealthItem").on("click", function (event) {
         event.preventDefault();
-        console.log(event);
         item = $("#healthAddTxt").val().trim();
-        topics.push(item);
         console.log(item);
+        if (item === "") {
+            return item;
+            //or break;
+        }
+        topics.push(item);
         createButtons();
         $("#healthAddTxt").val("");
     });
@@ -26,7 +29,7 @@ $(document).ready(function () {
         var chosen = $(this).attr("data-name");
         console.log(chosen);
         var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-            chosen + "&api_key=2hmfwLu9FCTywzkURnLFoPDqdeyUUhpU&limit=11";
+            chosen + "&api_key=2hmfwLu9FCTywzkURnLFoPDqdeyUUhpU&limit=10";
         $.ajax({
             url: queryURL,
             method: "GET"
@@ -36,17 +39,24 @@ $(document).ready(function () {
             for (var i = 0; i < res.data.length; i++) {
                 if (res.data[i].rating === "g" || res.data[i].rating === "pg") {
                     console.log(res.data[i]);
-                    var imgContainer = $("<div class='card col-lg-2 col-md-4 col-sm-6 m-3'>");
+                    var imgContainer = $("<div class='card col-lg-3 col-md-4 col-sm-6 px-3 my-3 py-3 float-left'>");
                     var cardImage = $("<img class='card-img-top image-responsive'>");
                     cardImage.addClass("gif");
                     cardImage.attr("src", res.data[i].images.original_still.url);
                     cardImage.attr("data-state", "still");
-                    var cardBody = $("<div class='card-body'>");
-                    var cardTitle = $("<h5 class='card-title'></h5>");
-                    cardTitle.text("Rating: " + res.data[i].rating);
-                    var cardRating = cardBody.add(cardTitle);
+                    var ul = $("<ul class='list-group list-group-flush'>");
+                    var li1 = $("<li class='list-group-item'>");
+                    var li2 = $("<li class='list-group-item'>");
+                    var link = $("<a class='card-link'>").attr("href", res.data[i].images.original.url).text("Download GIF");
+                    li1.text("Rating: " + res.data[i].rating);
+                    var group = ul.add(li1).add(li2).add(link);
+                    var cardTitle = $("<div class=title><h5 class='card-title'></h5></div>");
+                    if (res.data[i].title === "") {
+                        res.data[i].title = "Unamed Gif";
+                    }
+                    cardTitle.text("#" + res.data[i].title);
 
-                    var allElements = imgContainer.append(cardImage, cardRating);
+                    var allElements = imgContainer.append(cardTitle, cardImage, group);
                     allElements.appendTo("#health");
                 }
             }
@@ -55,23 +65,17 @@ $(document).ready(function () {
     });
     $(document.body).on("click", ".gif", returnRes, function () {
         var chosen = $(this);
-        console.log(returnRes);
-        console.log(chosen);
         var state = chosen.attr("data-state");
-        console.log("state 0" + state);
         for (var i = 0; i < returnRes.data.length; i++) {
             if (chosen.attr("src") === returnRes.data[i].images.original_still.url) {
                 chosen.attr("src", returnRes.data[i].images.original.url);
                 state = "animate";
-                console.log("state 1" + state);
             }
             else if (chosen.attr("src") === returnRes.data[i].images.original.url) {
                 chosen.attr("src", returnRes.data[i].images.original_still.url);
                 state = "still";
-                console.log("state 2" + state);
             }
         }
-
     });
     createButtons();
 });
