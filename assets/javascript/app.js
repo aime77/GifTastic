@@ -68,7 +68,7 @@ $(document).ready(function () {
         });
     });
     
-    var favoritesTitle = $("<h2>Favorites GIFS<br></h2>");
+    var favoritesTitle = $("<h2>Favorite GIFS<br></h2>");
     $(document.body).on("click", ".link2", function () {
         var favoritesArray = [];
         var chosen = $(this);
